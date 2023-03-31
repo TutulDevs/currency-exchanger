@@ -1,6 +1,14 @@
 import Head from "next/head";
+import { useQuery } from "@tanstack/react-query";
+import { getAllCurrencies, getConvertRate, getHistoricalData, getLatest } from "@/src/api";
 
 export default function Home() {
+  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn: getLatest });
+  // // console.log("ce: ", { data, error});
+
+  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn:()=> getConvertRate('USD', 'BDT', 12) });
+  // console.log("ce: ", data, error);
+
   return (
     <>
       <Head>
