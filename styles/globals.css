@@ -6,6 +6,42 @@
 
 @layer base {
   body {
-    @apply font-poppins;
+    @apply font-poppins text-indigo-950;
+  }
+
+  .hero {
+    @apply flex flex-col gap-8 sm:gap-2 sm:flex-row min-h-[400px] py-4 md:py-20;
+  }
+
+  .hero .content {
+    @apply min-h-[200px] min-w-[50%] flex-1 flex flex-col justify-center md:gap-4;
+  }
+
+  .hero .content h1 {
+    @apply text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold mb-4;
+  }
+
+  .hero .banner {
+    @apply min-h-[300px] min-w-[50%] flex-1 bg-[url('/banner.png')] bg-no-repeat bg-center sm:bg-left bg-[length:90%] md:bg-[length:110%] lg:bg-[length:80%] xl:bg-[length:70%];
+  }
+
+  .heroConvertForm .form {
+    @apply grid grid-cols-none lg:grid-cols-heroForm gap-2 justify-items-center items-center mb-6;
+  }
+
+  .heroConvertForm label {
+    @apply w-full border-2 border-indigo-100 hover:border-indigo-400 focus:border-indigo-500 rounded-lg py-2 px-3 flex items-center ease-in-out duration-300;
+  }
+
+  .heroConvertForm label input {
+    @apply border-0 focus:outline-0 md:text-2xl w-full;
+  }
+
+  .heroConvertForm .swap {
+    @apply hover:bg-slate-200 p-2 rounded-full ease-in-out duration-300;
+  }
+
+  .heroConvertForm .submit-button {
+    @apply text-xl font-semibold bg-indigo-500 hover:bg-indigo-600 text-white min-w-[175px] p-3 rounded-lg ease-in-out duration-300;
   }
 }
