@@ -22,7 +22,7 @@
   }
 
   .hero .banner {
-    @apply min-h-[300px] min-w-[50%] flex-1 bg-[url('/banner.png')] bg-no-repeat bg-center sm:bg-left bg-[length:90%] md:bg-[length:110%] lg:bg-[length:80%] xl:bg-[length:70%];
+    @apply min-h-[300px] min-w-[50%] flex-1 bg-[url('/banner.png')] bg-no-repeat bg-center sm:bg-right bg-[length:90%] md:bg-[length:110%] lg:bg-[length:80%] xl:bg-[length:70%];
   }
 
   .heroConvertForm .form {
