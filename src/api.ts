@@ -1,7 +1,7 @@
 import { ConvertDataType, LatestType } from "@/types";
 import customAxios from "./axios";
 import axios from "axios";
-import { APP_DEFAULTS, DEFAULT_API_SUFFIX } from "./coreconstants";
+import { DEFAULT_API_SUFFIX } from "./coreconstants";
 import { getPreviousDay } from "./corefunctions";
 
 export const getLatest = async (): Promise<LatestType> => {
