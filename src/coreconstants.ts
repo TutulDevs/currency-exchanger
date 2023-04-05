@@ -12,3 +12,10 @@ export enum LOCAL_DATA {
   CURRENCY_TARGET = "CURRENCY_TARGET",
   CURRENCY_LIST = "CURRENCY_LIST",
 }
+
+export const SELECTED_SYMBOLS = ["USD", "EUR", "GBP", "BDT", "AUD"];
+
+export const DUMMY_LIST = [
+  { code: "USD", title: "United States Dollar" },
+  { code: "BDT", title: "Bangladeshi Taka" },
+];

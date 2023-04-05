@@ -8,14 +8,17 @@ export interface CurrencyListItemType {
   title: string;
 }
 
-
 export interface IconProps {
   className?: string;
 }
-
 
 export interface HeroConvertFormListBoxProps {
   currency: string;
   currencyList: CurrencyListItemType[];
   onChange: (val: string) => void;
+}
+
+export interface ConvertDataType {
+  rate: number;
+  result?: number;
 }

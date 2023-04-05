@@ -28,7 +28,7 @@ export const HeroConvertFormListBox: React.FC<HeroConvertFormListBoxProps> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute -right-3 top-9 mt-1 max-h-60 w-[200px] overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="absolute -right-3 top-9 z-[1] mt-1 max-h-60 w-[200px] overflow-auto overflow-x-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {currencyList.map((cur, curIdx) => (
               <Listbox.Option
                 key={curIdx}

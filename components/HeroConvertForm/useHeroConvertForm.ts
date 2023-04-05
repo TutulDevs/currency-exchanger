@@ -1,64 +1,88 @@
-import { APP_DEFAULTS } from "@/src/coreconstants";
-import { useState } from "react";
+import { APP_DEFAULTS, LOCAL_DATA } from "@/src/coreconstants";
+import { RootState } from "@/src/store";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { setTargetCurrency } from "../../src/store/slices/applicaton.slice";
+import { setLocalData } from "@/src/corefunctions";
+import { useQuery } from "@tanstack/react-query";
+import { getConvertRate } from "@/src/api";
 
 export const useHeroConvertForm = () => {
+  const dispatch = useDispatch();
+  const { targetCurrency, currencyList } = useSelector(
+    (state: RootState) => state.appSettings
+  );
+
+  const [rate, setRate] = useState(0);
   const [base, setBase] = useState(APP_DEFAULTS.CONVERT_MIN_VALUE);
-  const [target, setTarget] = useState<null | number>(null);
+  const [target, setTarget] = useState(rate * Number(base));
+
+  useEffect(() => {
+    setTarget(rate * Number(base));
+  }, [rate, base]);
 
   const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBase(Number(e.target.value));
-    // setTarget(null);
+    const base = Number(e.target.value);
+    setBase(base);
+    setTarget(rate * base);
   };
 
-  // get this list from redux
-  const allCurrencies = [
-    { code: "USD", title: "United States Dollar" },
-    { code: "BDT", title: "Bangladeshi Taka" },
-    { code: "AED", title: "United Arab Emirates Dirham" },
-  ];
+  const [baseCurrency, setBaseCurrency] = useState(APP_DEFAULTS.CURRENCY_BASE);
 
-  const filteredBaseCurrency = allCurrencies.filter(
-    (el) => el.code === APP_DEFAULTS.CURRENCY_BASE
-  )[0];
-  // get the target from redux
-  const filteredTargetCurrency = allCurrencies.filter(
-    (el) => el.code === APP_DEFAULTS.CURRENCY_TARGET
-  )[0];
-
-  const [baseCurrency, setBaseCurrency] = useState(
-    filteredBaseCurrency ? filteredBaseCurrency.code : allCurrencies[0].code
-  );
-  const [targetCurrency, setTargetCurrency] = useState(
-    filteredTargetCurrency ? filteredTargetCurrency.code : allCurrencies[1].code
-  );
+  useEffect(() => {
+    setBaseCurrency(
+      targetCurrency === APP_DEFAULTS.CURRENCY_BASE
+        ? APP_DEFAULTS.CURRENCY_TARGET
+        : baseCurrency //APP_DEFAULTS.CURRENCY_BASE
+    );
+  }, [targetCurrency]);
 
   const handleBaseCurrencyChange = (code: string) => {
     if (code === targetCurrency)
       toast.error(`You cannot select "${targetCurrency}"`);
-    else setBaseCurrency(code);
-  };
-
-  const handleTargetCurrencyChange = (code: string) => {
-    if (code === baseCurrency)
-      toast.error(`You cannot select "${baseCurrency}"`);
-    else setTargetCurrency(code);
-  };
-
-  const handleConvert = () => {
-    setTarget((base as number) * 10);
-  };
-
-  const handleSwap = () => {
-    if (target) {
-      setTarget(base as number);
-      setBase(target);
-      setBaseCurrency(targetCurrency);
-      setTargetCurrency(baseCurrency);
+    else {
+      setRate(0);
+      setBaseCurrency(code as APP_DEFAULTS);
     }
   };
 
-  // console.log("ce: ", { base, target, baseCurrency, targetCurrency });
+  const handleTargetCurrencyChange = (code: string) => {
+    if (code === baseCurrency) {
+      toast.error(`You cannot select "${baseCurrency}"`);
+    } else {
+      setRate(0);
+      dispatch(setTargetCurrency(code));
+      setLocalData(LOCAL_DATA.CURRENCY_TARGET, code);
+    }
+  };
+
+  const { data, error, refetch } = useQuery(
+    ["rate"],
+    () => getConvertRate(baseCurrency as string, targetCurrency, base),
+    {
+      enabled: false,
+      onSuccess: async (d) => {
+        setRate(Number(d.rate));
+      },
+    }
+  );
+  // console.log("ce: ", data, error);
+
+  const handleConvert = async () => {
+    refetch();
+  };
+
+  const handleSwap = () => {
+    setBase(APP_DEFAULTS.CONVERT_MIN_VALUE);
+    setRate(0);
+
+    setBaseCurrency(targetCurrency as APP_DEFAULTS);
+    dispatch(setTargetCurrency(baseCurrency as string));
+    setLocalData(LOCAL_DATA.CURRENCY_TARGET, baseCurrency as string);
+  };
+
+  // console.log("ce: ", { base, target, rate, baseCurrency, targetCurrency });
 
   return {
     base,
@@ -68,7 +92,7 @@ export const useHeroConvertForm = () => {
     handleSwap,
     baseCurrency,
     targetCurrency,
-    allCurrencies,
+    currencyList,
     handleBaseCurrencyChange,
     handleTargetCurrencyChange,
   };

@@ -1,10 +1,7 @@
-import { Fragment } from "react";
 import { useHeroConvertForm } from "./useHeroConvertForm";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronUpDownIcon } from "../Icons";
 import { HeroConvertFormListBox } from "./HeroConvertFormListBox";
 
-export const HeroConvertForm = () => {
+export const HeroConvertForm: React.FC = () => {
   const {
     base,
     target,
@@ -13,7 +10,7 @@ export const HeroConvertForm = () => {
     handleSwap,
     baseCurrency,
     targetCurrency,
-    allCurrencies,
+    currencyList,
     handleBaseCurrencyChange,
     handleTargetCurrencyChange,
   } = useHeroConvertForm();
@@ -31,11 +28,13 @@ export const HeroConvertForm = () => {
             onChange={handleBaseChange}
           />
 
-          <HeroConvertFormListBox
-            currency={baseCurrency}
-            currencyList={allCurrencies}
-            onChange={handleBaseCurrencyChange}
-          />
+          {currencyList && (
+            <HeroConvertFormListBox
+              currency={baseCurrency as string}
+              currencyList={currencyList}
+              onChange={handleBaseCurrencyChange}
+            />
+          )}
         </label>
 
         <button
@@ -67,13 +66,14 @@ export const HeroConvertForm = () => {
             value={target ? target.toFixed(2) : ""}
             readOnly
           />
-          
-          
-          <HeroConvertFormListBox
-            currency={targetCurrency}
-            currencyList={allCurrencies}
-            onChange={handleTargetCurrencyChange}
-          />
+
+          {currencyList && (
+            <HeroConvertFormListBox
+              currency={targetCurrency}
+              currencyList={currencyList}
+              onChange={handleTargetCurrencyChange}
+            />
+          )}
         </label>
       </div>
 

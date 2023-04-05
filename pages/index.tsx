@@ -13,7 +13,7 @@ export default function Home() {
   // const { data, error } = useQuery({ queryKey: ["todos"], queryFn: getLatest });
   // // console.log("ce: ", { data, error});
 
-  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn:()=> getConvertRate('USD', 'BDT', 12) });
+  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn:()=> getConvertRate('USD', 'BDT', '12') });
   // console.log("ce: ", data, error);
 
   return (
