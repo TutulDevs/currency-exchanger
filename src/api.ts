@@ -15,18 +15,25 @@ export const getAllCurrencies = async () => {
   return await res.data;
 };
 
-export const getHistoricalData = async (days: number): Promise<LatestType> => {
-  const date = getPreviousDay(days);
+export const getHistoricalData = async (
+  base: string,
+  targets: string[],
+  prevDays: number
+): Promise<any> => {
+  const [date_from, date_to] = [getPreviousDay(prevDays), getPreviousDay(3)];
 
-  const res = await customAxios.get(
-    `/historical/${date}.json` + DEFAULT_API_SUFFIX
-  );
-  const data = await res.data;
+  const url = `${process.env.NEXT_PUBLIC_HISTORICAL_URL}?apikey=${
+    process.env.NEXT_PUBLIC_HISTORICAL_KEY
+  }&currencies=${targets.join(
+    ","
+  )}&base_currency=${base}&date_from=${date_from}&date_to=${date_to}`;
 
-  return {
-    base: data.base,
-    rates: data.rates,
-  };
+  const res = await axios.get(url);
+  const data = await res.data?.data;
+
+  console.log("ce: ", data);
+
+  return data;
 };
 
 export const getConvertRate = async (
