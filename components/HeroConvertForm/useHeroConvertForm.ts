@@ -8,7 +8,7 @@ import { setLocalData } from "@/src/corefunctions";
 import { useQuery } from "@tanstack/react-query";
 import { getConvertRate } from "@/src/api";
 
-export const useHeroConvertForm = () => {
+export const useHeroConvertForm = (baseCur?: string) => {
   const dispatch = useDispatch();
   const { targetCurrency, currencyList } = useSelector(
     (state: RootState) => state.appSettings
@@ -28,7 +28,9 @@ export const useHeroConvertForm = () => {
     setTarget(rate * base);
   };
 
-  const [baseCurrency, setBaseCurrency] = useState(APP_DEFAULTS.CURRENCY_BASE);
+  const [baseCurrency, setBaseCurrency] = useState(
+    baseCur ? baseCur : APP_DEFAULTS.CURRENCY_BASE
+  );
 
   useEffect(() => {
     setBaseCurrency(
@@ -43,7 +45,7 @@ export const useHeroConvertForm = () => {
       toast.error(`You cannot select "${targetCurrency}"`);
     else {
       setRate(0);
-      setBaseCurrency(code as APP_DEFAULTS);
+      setBaseCurrency(code);
     }
   };
 
@@ -77,7 +79,7 @@ export const useHeroConvertForm = () => {
     setBase(APP_DEFAULTS.CONVERT_MIN_VALUE);
     setRate(0);
 
-    setBaseCurrency(targetCurrency as APP_DEFAULTS);
+    setBaseCurrency(targetCurrency );
     dispatch(setTargetCurrency(baseCurrency as string));
     setLocalData(LOCAL_DATA.CURRENCY_TARGET, baseCurrency as string);
   };

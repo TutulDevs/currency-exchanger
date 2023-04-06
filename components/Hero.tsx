@@ -2,12 +2,12 @@ import { HeroConvertForm } from "./HeroConvertForm/HeroConvertForm";
 
 export const Hero = () => {
   return (
-    <div className="hero">
+    <section className="hero">
       <div className="content ">
         <h1 className="content-title">Currency Exchanger</h1>
 
         <p className="text-indigo-900">
-          Your one stop solution to get the exchange rates.
+          Your one stop solution to get the best exchange rates.
         </p>
 
         <HeroConvertForm />
@@ -15,6 +15,6 @@ export const Hero = () => {
 
       {/* hero banner image */}
       <div className="banner " />
-    </div>
+    </section>
   );
 };

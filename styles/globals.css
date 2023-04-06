@@ -37,7 +37,7 @@
   }
 
   .hero .content h1 {
-    @apply text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-bold mb-4;
+    @apply text-3xl md:text-5xl lg:text-7xl font-bold mb-4;
   }
 
   .hero .banner {
@@ -49,7 +49,7 @@
   }
 
   .heroConvertForm label {
-    @apply w-full border-2 border-indigo-100 hover:border-indigo-400 focus:border-indigo-500 rounded-lg py-2 px-3 flex items-center ease-in-out duration-300;
+    @apply w-full border-2 bg-white border-indigo-100 hover:border-indigo-400 focus:border-indigo-500 rounded-lg py-2 px-3 flex items-center ease-in-out duration-300;
   }
 
   .heroConvertForm label input {
@@ -62,5 +62,41 @@
 
   .heroConvertForm .submit-button {
     @apply text-xl font-semibold bg-indigo-500 hover:bg-indigo-600 text-white min-w-[175px] p-3 rounded-lg ease-in-out duration-300;
+  }
+
+  .heroConvertForm-two {
+    @apply mt-24 max-w-2xl mx-auto;
+  }
+
+  .heroConvertForm-two .form {
+    @apply grid grid-cols-none sm:grid-cols-2 gap-4 justify-items-center items-center mb-6;
+  }
+
+  .heroConvertForm-two .submit-button-wrapper {
+    @apply text-center;
+  }
+
+  .heroConvertForm-two .submit-button-wrapper button {
+    @apply w-full sm:max-w-xs;
+  }
+
+  .listbox-one {
+    @apply absolute -right-3 top-9 z-[1] mt-1 max-h-60 w-[200px] overflow-auto overflow-x-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  }
+
+  .listbox-one-option {
+    @apply relative w-[200px] select-none py-1 px-2 cursor-pointer hover:bg-indigo-300 hover:text-slate-100 block truncate;
+  }
+
+  .suggestion-link {
+    @apply shadow hover:shadow-none hover:ring-1 ring-indigo-500 rounded-md flex items-center justify-between gap-4 text-center px-4 py-3 ease-in-out duration-300;
+  }
+
+  .suggestion-link:hover svg {
+    @apply stroke-[4px] stroke-indigo-500;
+  }
+
+  .suggestion-link-two {
+    @apply shadow hover:shadow-none hover:ring-1 ring-indigo-500 rounded-md px-4 py-3 ease-in-out duration-300;
   }
 }

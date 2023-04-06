@@ -1,21 +1,10 @@
 import Head from "next/head";
-import { useQuery } from "@tanstack/react-query";
-import {
-  getAllCurrencies,
-  getConvertRate,
-  getHistoricalData,
-  getLatest,
-} from "@/src/api";
 import { Layout } from "@/layouts/Layout";
 import { Hero } from "@/components/Hero";
+import { CurrencySuggestion } from "@/components/CurrencySuggestion";
+import { FindOtherCurrencies } from "@/components/FindOtherCurrencies";
 
 export default function Home() {
-  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn: getLatest });
-  // // console.log("ce: ", { data, error});
-
-  // const { data, error } = useQuery({ queryKey: ["todos"], queryFn:()=> getConvertRate('USD', 'BDT', '12') });
-  // console.log("ce: ", data, error);
-
   return (
     <>
       <Head>
@@ -27,6 +16,10 @@ export default function Home() {
 
       <Layout>
         <Hero />
+
+        <CurrencySuggestion />
+
+        <FindOtherCurrencies />
       </Layout>
     </>
   );

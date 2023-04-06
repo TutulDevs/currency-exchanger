@@ -16,6 +16,7 @@ export interface HeroConvertFormListBoxProps {
   currency: string;
   currencyList: CurrencyListItemType[];
   onChange: (val: string) => void;
+  fixedBase?: boolean;
 }
 
 export interface ConvertDataType {

@@ -19,3 +19,35 @@ export const DUMMY_LIST = [
   { code: "USD", title: "United States Dollar" },
   { code: "BDT", title: "Bangladeshi Taka" },
 ];
+
+export const POPULAR_CURRENCY_LIST = [
+  { base: "USD", target: "EUR" },
+  { base: "USD", target: "GBP" },
+  { base: "EUR", target: "JPY" },
+  { base: "AUD", target: "USD" },
+  { base: "USD", target: "CHF" },
+];
+
+export const OTHER_CURRENCIES_CODE = [
+  "AED",
+  "AUD",
+  "BRL",
+  "CHF",
+  "CNY",
+  "EUR",
+  "GBP",
+  "HKD",
+  "INR",
+  "JPY",
+  "MXN",
+  "MYR",
+  "PHP",
+  "SAR",
+  "SEK",
+  "BDT",
+  "SGD",
+  "THB",
+  "USD",
+  "ZAR",
+  'RUB'
+];
