@@ -32,12 +32,19 @@ export const useHeroConvertForm = (baseCur?: string) => {
     baseCur ? baseCur : APP_DEFAULTS.CURRENCY_BASE
   );
 
+  // update base currency if the baseCur changes
+  useEffect(() => {
+    if (baseCur) setBaseCurrency(baseCur);
+  }, [baseCur]);
+
+  // check target currency
   useEffect(() => {
     setBaseCurrency(
       targetCurrency === APP_DEFAULTS.CURRENCY_BASE
         ? APP_DEFAULTS.CURRENCY_TARGET
         : baseCurrency //APP_DEFAULTS.CURRENCY_BASE
     );
+    setRate(0);
   }, [targetCurrency]);
 
   const handleBaseCurrencyChange = (code: string) => {
@@ -79,7 +86,7 @@ export const useHeroConvertForm = (baseCur?: string) => {
     setBase(APP_DEFAULTS.CONVERT_MIN_VALUE);
     setRate(0);
 
-    setBaseCurrency(targetCurrency );
+    setBaseCurrency(targetCurrency);
     dispatch(setTargetCurrency(baseCurrency as string));
     setLocalData(LOCAL_DATA.CURRENCY_TARGET, baseCurrency as string);
   };

@@ -81,7 +81,7 @@
   }
 
   .listbox-one {
-    @apply absolute -right-3 top-9 z-[1] mt-1 max-h-60 w-[200px] overflow-auto overflow-x-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+    @apply absolute -right-3 top-9 z-[100] mt-1 max-h-60 w-[200px] overflow-auto overflow-x-hidden rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
   }
 
   .listbox-one-option {

@@ -1,7 +1,7 @@
 import { CurrencyBanner } from "@/components/CurrencyBanner";
+import { CurrencyHistoricalChart } from "@/components/CurrencyHistoricalChart/CurrencyHistoricalChart";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import React from "react";
 
 export const LayoutCurrency: React.FC<{
   code: string;
@@ -15,6 +15,7 @@ export const LayoutCurrency: React.FC<{
         <main className="container mx-auto px-2">
           {/* banner and form */}
           <CurrencyBanner code={code} />
+          <CurrencyHistoricalChart code={code} />
 
           {/* children */}
           {children}

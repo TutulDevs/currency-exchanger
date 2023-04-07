@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Layout } from "@/layouts/Layout";
 import { Hero } from "@/components/Hero";
-import { CurrencySuggestion } from "@/components/CurrencySuggestion";
 import { FindOtherCurrencies } from "@/components/FindOtherCurrencies";
 
 export default function Home() {
@@ -16,8 +15,6 @@ export default function Home() {
 
       <Layout>
         <Hero />
-
-        <CurrencySuggestion />
 
         <FindOtherCurrencies />
       </Layout>

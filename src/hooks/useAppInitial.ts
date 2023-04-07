@@ -32,11 +32,16 @@ export const useAppInitial = () => {
   const handleList = async () => {
     try {
       const res = await getAllCurrencies();
+      const data = await res.data;
 
-      const arr: CurrencyListItemType[] = []; // mockCurrencyList; // [];
+      const arr: CurrencyListItemType[] = [];
 
-      for (let key in res) {
-        arr.push({ code: key, title: res[key as keyof typeof res] });
+      for (let key in data) {
+        arr.push({
+          code: key,
+          title: data[key as keyof typeof data].name,
+          symbol: data[key as keyof typeof data].symbol,
+        });
       }
 
       setLocalData(LOCAL_DATA.CURRENCY_LIST, arr, true);

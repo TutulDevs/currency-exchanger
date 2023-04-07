@@ -1,37 +1,30 @@
-import { ConvertDataType, LatestType } from "@/types";
-import customAxios from "./axios";
+import { ConvertDataType } from "@/types";
 import axios from "axios";
-import { DEFAULT_API_SUFFIX } from "./coreconstants";
 import { getPreviousDay } from "./corefunctions";
 
-export const getLatest = async (): Promise<LatestType> => {
-  const res = await customAxios.get(`/latest.json` + DEFAULT_API_SUFFIX);
-  const data = await res.data;
-  return { base: data.base, rates: data.rates };
-};
-
 export const getAllCurrencies = async () => {
-  const res = await customAxios.get(`/currencies.json`);
+  const url = `${process.env.NEXT_PUBLIC_FREECURRENCYAPI_URL}/currencies?apikey=${process.env.NEXT_PUBLIC_FREECURRENCYAPI_KEY}`;
+  const res = await axios.get(url);
   return await res.data;
 };
 
 export const getHistoricalData = async (
   base: string,
-  targets: string[],
+  targets: string | string[],
   prevDays: number
 ): Promise<any> => {
   const [date_from, date_to] = [getPreviousDay(prevDays), getPreviousDay(3)];
 
-  const url = `${process.env.NEXT_PUBLIC_HISTORICAL_URL}?apikey=${
-    process.env.NEXT_PUBLIC_HISTORICAL_KEY
-  }&currencies=${targets.join(
-    ","
-  )}&base_currency=${base}&date_from=${date_from}&date_to=${date_to}`;
+  const url = `${
+    process.env.NEXT_PUBLIC_FREECURRENCYAPI_URL
+  }/historical?apikey=${
+    process.env.NEXT_PUBLIC_FREECURRENCYAPI_KEY
+  }&currencies=${
+    typeof targets === "string" ? targets : targets.join(",")
+  }&base_currency=${base}&date_from=${date_from}&date_to=${date_to}`;
 
   const res = await axios.get(url);
   const data = await res.data?.data;
-
-  console.log("ce: ", data);
 
   return data;
 };

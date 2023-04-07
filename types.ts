@@ -6,6 +6,7 @@ export interface LatestType {
 export interface CurrencyListItemType {
   code: string;
   title: string;
+  symbol: string;
 }
 
 export interface IconProps {
