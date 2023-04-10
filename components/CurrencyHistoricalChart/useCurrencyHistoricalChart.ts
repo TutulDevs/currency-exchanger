@@ -23,7 +23,7 @@ export const useCurrencyHistoricalChart = (code: string) => {
     () => getHistoricalData(code, targetCurrency, APP_DEFAULTS.HISTORY_IN_DAYS),
     {
       enabled: !!targetCurrency,
-      // refetchInterval: 10000
+      refetchInterval: APP_DEFAULTS.INTERVAL as number,
       onSuccess: async (res) => {
         let arr: any = [];
         for (let key in res) {
